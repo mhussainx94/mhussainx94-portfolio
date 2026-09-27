@@ -73,6 +73,11 @@ export default function Home() {
         <Hero reducedMotion={reducedMotion} nextSectionId={BOOT_ID} />
         <BootSequence reducedMotion={reducedMotion} id={BOOT_ID} />
 
+        {/* Deliberately not a SectionShell: no rail index, no nav entry,
+            not part of the `sections` array above — this is a small
+            action block, not a page section. */}
+        <CvTerminal reducedMotion={reducedMotion} />
+
         <SectionShell
           id="about"
           index={1}
@@ -82,11 +87,6 @@ export default function Home() {
         >
           <About />
         </SectionShell>
-
-        {/* Deliberately not a SectionShell: no rail index, no nav entry,
-            not part of the `sections` array above — this is a small
-            aside, not a page section. See CvTerminal.tsx. */}
-        <CvTerminal reducedMotion={reducedMotion} />
 
         <SectionShell
           id="education"

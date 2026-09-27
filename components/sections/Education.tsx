@@ -1,7 +1,6 @@
 import { ChevronDown, GraduationCap } from "lucide-react";
 import { SectionHeading, Chip } from "@/components/ui/Primitives";
 import { education } from "@/data/education";
-import { skillGroups } from "@/data/skills";
 import { formatMonthYear } from "@/lib/utils";
 import { useState } from "react";
 
@@ -88,10 +87,10 @@ export function Education() {
               >
                 <span>
                   <span className="block font-mono text-2xs uppercase tracking-[0.18em] text-ink">
-                    Learned Skills & Courses
+                    Courses Learned
                   </span>
                   <span className="mt-1 block text-xs text-ink-faint">
-                    {showLearned ? "Hide courses and skills" : "Show courses and skills"}
+                    {showLearned ? "Hide courses" : "Show courses"}
                   </span>
                 </span>
                 <ChevronDown
@@ -103,34 +102,11 @@ export function Education() {
               </button>
 
               {showLearned && (
-                <div className="mt-4 space-y-6">
-                  <div>
-                    <p className="font-mono text-2xs uppercase tracking-[0.18em] text-signal">
-                      Courses Learned
-                    </p>
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      {entry.coursework.map((course) => (
-                        <Chip key={course}>{course}</Chip>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <p className="font-mono text-2xs uppercase tracking-[0.18em] text-signal">
-                      Skills
-                    </p>
-                    <div className="mt-3 space-y-4">
-                      {skillGroups.map((group) => (
-                        <div key={group.id}>
-                          <p className="font-mono text-xs text-ink">{group.label}</p>
-                          <div className="mt-2 flex flex-wrap gap-2">
-                            {group.skills.map((skill) => (
-                              <Chip key={skill}>{skill}</Chip>
-                            ))}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
+                <div className="mt-4">
+                  <div className="flex flex-wrap gap-2">
+                    {entry.coursework.map((course) => (
+                      <Chip key={course}>{course}</Chip>
+                    ))}
                   </div>
                 </div>
               )}

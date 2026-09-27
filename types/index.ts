@@ -21,6 +21,13 @@ export interface Profile {
   bio: string[];
 }
 
+export interface EducationProject {
+  id: string;
+  title: string;
+  description: string;
+  technologies?: string[];
+}
+
 export interface EducationEntry {
   id: string;
   institution: string;
@@ -31,7 +38,7 @@ export interface EducationEntry {
   endDate: string;
   studentId?: string;
   coursework: string[];
-  notes?: string[];
+  universityProjects?: EducationProject[];
 }
 
 export type CertificationStatus = "completed" | "exploring";

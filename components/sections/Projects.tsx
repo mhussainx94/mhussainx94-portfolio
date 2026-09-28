@@ -29,9 +29,14 @@ function ProjectCard({ project, reducedMotion }: ProjectCardProps) {
       )}
     >
       <div className="flex min-w-0 items-start justify-between gap-3">
-        <h3 className="min-w-0 break-words font-mono text-base text-ink sm:text-lg">
-          {project.title}
-        </h3>
+        <div className="min-w-0">
+          <p className="mb-1 font-mono text-2xs uppercase tracking-[0.16em] text-signal">
+            {project.projectType}
+          </p>
+          <h3 className="min-w-0 break-words font-mono text-base text-ink sm:text-lg">
+            {project.title}
+          </h3>
+        </div>
 
         {project.status === "in-progress" && (
           <span className="shrink-0 rounded border border-line px-2 py-0.5 font-mono text-2xs text-cyan">

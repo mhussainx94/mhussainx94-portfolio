@@ -79,6 +79,7 @@ export interface Project {
   description: string;
   category: ProjectCategory;
   featured?: boolean;
+  projectType: string;
   technologies: string[];
   githubUrl?: string;
   liveUrl?: string;

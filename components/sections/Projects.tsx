@@ -13,61 +13,58 @@ interface ProjectCardProps {
 }
 
 function ProjectCard({ project, reducedMotion }: ProjectCardProps) {
-  const isPlaceholder = project.status === "add-details";
-
   return (
-    <motion.div
-      whileHover={reducedMotion ? undefined : { y: -3 }}
-      whileTap={reducedMotion ? undefined : { scale: 0.99 }}
+    <motion.article
+      whileHover={reducedMotion ? undefined : { y: -4 }}
+      whileTap={reducedMotion ? undefined : { scale: 0.995 }}
       transition={{ duration: 0.2, ease: "easeOut" }}
       className={cn(
-        "flex min-w-0 h-full flex-col rounded-md border p-4 sm:p-5 md:p-6",
-        isPlaceholder
-          ? "border-dashed border-line"
-          : "border-line bg-panel",
+        "group flex min-w-0 h-full flex-col rounded-md border border-line bg-panel p-4 transition-colors sm:p-5 md:p-6",
+        "hover:border-signal/40",
         project.featured && "sm:col-span-2"
       )}
     >
-      <div className="flex min-w-0 items-start justify-between gap-3">
-        <h3 className="min-w-0 break-words font-mono text-base text-ink sm:text-lg">
-          {project.title}
-        </h3>
+      <div className="flex min-w-0 items-start justify-between gap-4">
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+            <p className="font-mono text-2xs uppercase tracking-[0.16em] text-signal">
+              {project.projectType}
+            </p>
+            {project.status === "in-progress" && (
+              <span className="font-mono text-2xs uppercase tracking-[0.12em] text-cyan">
+                • active
+              </span>
+            )}
+          </div>
 
-        {project.status === "in-progress" && (
-          <span className="shrink-0 rounded border border-line px-2 py-0.5 font-mono text-2xs text-cyan">
-            in progress
-          </span>
-        )}
+          <h3 className="mt-2 min-w-0 break-words font-mono text-base leading-snug text-ink sm:text-lg">
+            {project.title}
+          </h3>
+        </div>
       </div>
 
-      <p
-        className={cn(
-          "mt-3 min-w-0 flex-1 break-words text-sm leading-relaxed",
-          isPlaceholder ? "italic text-ink-faint" : "text-ink-muted"
-        )}
-      >
+      <p className="mt-3 min-w-0 flex-1 break-words text-sm leading-6 text-ink-muted">
         {project.description}
       </p>
 
-      {project.technologies.length > 0 && (
-        <div className="mt-5 flex min-w-0 flex-wrap gap-2">
-          {project.technologies.map((tech) => (
-            <Chip key={tech}>{tech}</Chip>
-          ))}
-        </div>
-      )}
+      <div className="mt-5 flex min-w-0 flex-wrap gap-2">
+        {project.technologies.map((tech) => (
+          <Chip key={tech}>{tech}</Chip>
+        ))}
+      </div>
 
       {(project.githubUrl || project.liveUrl) && (
-        <div className="mt-5 flex flex-wrap gap-4 border-t border-line pt-4">
+        <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-line pt-4">
           {project.githubUrl && (
             <a
               href={project.githubUrl}
               target="_blank"
               rel="noreferrer noopener"
-              className="inline-flex min-h-8 items-center gap-1.5 font-mono text-2xs text-ink-muted transition-colors hover:text-signal"
+              aria-label={"View " + project.title + " source code on GitHub"}
+              className="inline-flex min-h-8 items-center gap-1.5 font-mono text-2xs uppercase tracking-[0.1em] text-ink-muted transition-colors hover:text-signal"
             >
               <Github className="h-3.5 w-3.5" aria-hidden="true" />
-              code
+              GitHub
             </a>
           )}
 
@@ -76,15 +73,16 @@ function ProjectCard({ project, reducedMotion }: ProjectCardProps) {
               href={project.liveUrl}
               target="_blank"
               rel="noreferrer noopener"
-              className="inline-flex min-h-8 items-center gap-1.5 font-mono text-2xs text-ink-muted transition-colors hover:text-signal"
+              aria-label={"Open " + project.title + " live demo"}
+              className="inline-flex min-h-8 items-center gap-1.5 font-mono text-2xs uppercase tracking-[0.1em] text-ink-muted transition-colors hover:text-signal"
             >
               <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
-              live
+              Live demo
             </a>
           )}
         </div>
       )}
-    </motion.div>
+    </motion.article>
   );
 }
 
@@ -95,19 +93,12 @@ export function Projects({
 }) {
   return (
     <>
-      <SectionHeading title="Projects" />
+      <SectionHeading
+        title="Projects"
+        description="Selected security tools, lab work, and technical projects built or documented through hands-on work."
+      />
 
-      <div
-        className="
-          grid
-          min-w-0
-          grid-cols-1
-          gap-4
-          sm:grid-cols-2
-          sm:gap-5
-          lg:gap-6
-        "
-      >
+      <div className="grid min-w-0 grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:gap-6">
         {projects.map((project) => (
           <ProjectCard
             key={project.id}

@@ -21,13 +21,13 @@ export function Certifications() {
     <>
       <SectionHeading title="Certifications" />
 
-      <div className="min-w-0 divide-y divide-line rounded-xl border border-line bg-panel">
+      <div className="divide-y divide-line overflow-hidden rounded-md border border-line bg-panel">
         {completed.map((cert) => {
           const isExpanded = expandedCert === cert.id;
 
           return (
-            <div key={cert.id} className="relative px-4 py-5 sm:px-5">
-              <div className="grid min-w-0 grid-cols-[auto_minmax(0,1fr)] items-start gap-x-3 gap-y-3 sm:grid-cols-[auto_minmax(0,1fr)_auto]">
+            <div key={cert.id} className="px-5 py-4">
+              <div className="flex items-start gap-3">
                 <CheckCircle2
                   className="mt-0.5 h-4 w-4 shrink-0 text-signal"
                   aria-hidden="true"
@@ -36,14 +36,14 @@ export function Certifications() {
                 <button
                   type="button"
                   onClick={() => toggleCertificate(cert.id)}
-                  className="min-w-0 flex-1 rounded-sm text-left after:absolute after:inset-0 after:cursor-pointer after:rounded-sm after:content-[''] focus-visible:outline-none focus-visible:after:outline focus-visible:after:outline-2 focus-visible:after:outline-offset-[-2px] focus-visible:after:outline-cyan"
+                  className="min-w-0 flex-1 text-left"
                   aria-expanded={isExpanded}
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
-                      <p className="break-words font-mono text-sm font-medium leading-6 text-cyan [overflow-wrap:anywhere]">{cert.name}</p>
+                      <p className="text-sm text-ink">{cert.name}</p>
 
-                      <p className="mt-1 break-words text-xs leading-5 text-ink-muted">
+                      <p className="mt-0.5 text-xs text-ink-muted">
                         {cert.issuer}
                       </p>
                     </div>
@@ -67,7 +67,7 @@ export function Certifications() {
                   >
                     <div className="min-h-0 overflow-hidden">
                       {cert.note && (
-                        <p className="pt-3 break-words text-sm leading-6 text-ink-muted [overflow-wrap:anywhere]">
+                        <p className="pt-2 text-2xs leading-relaxed text-ink-faint">
                           {cert.note}
                         </p>
                       )}
@@ -75,12 +75,12 @@ export function Certifications() {
                   </div>
                 </button>
 
-                <div className="col-start-2 flex min-w-0 flex-wrap items-center gap-3 sm:col-start-3 sm:row-start-1">
+                <div className="flex shrink-0 items-center gap-3">
                   {cert.imageUrl && (
                     <button
                       type="button"
                       onClick={() => setSelectedImage(cert.imageUrl!)}
-                      className="relative z-10 font-mono text-2xs text-cyan underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
+                      className="font-mono text-2xs text-cyan underline-offset-4 hover:underline"
                     >
                       view
                     </button>
@@ -91,7 +91,7 @@ export function Certifications() {
                       href={cert.credentialUrl}
                       target="_blank"
                       rel="noreferrer noopener"
-                      className="relative z-10 font-mono text-2xs text-cyan underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
+                      className="font-mono text-2xs text-cyan underline-offset-4 hover:underline"
                     >
                       verify
                     </a>
@@ -105,16 +105,16 @@ export function Certifications() {
 
       {exploring.length > 0 && (
         <div className="mt-6">
-          <p className="mb-3 font-mono text-xs text-ink-muted">
+          <p className="mb-3 font-mono text-2xs text-ink-faint">
             currently exploring
           </p>
 
-          <div className="min-w-0 divide-y divide-line rounded-xl border border-dashed border-line bg-panel">
+          <div className="divide-y divide-line overflow-hidden rounded-md border border-dashed border-line">
             {exploring.map((cert) => {
               const isExpanded = expandedCert === cert.id;
 
               return (
-                <div key={cert.id} className="relative px-4 py-4 sm:px-5">
+                <div key={cert.id} className="px-5 py-3.5">
                   <div className="flex items-start gap-3">
                     <CircleDashed
                       className="mt-0.5 h-4 w-4 shrink-0 text-ink-faint"
@@ -124,16 +124,16 @@ export function Certifications() {
                     <button
                       type="button"
                       onClick={() => toggleCertificate(cert.id)}
-                      className="min-w-0 flex-1 rounded-sm text-left after:absolute after:inset-0 after:cursor-pointer after:rounded-sm after:content-[''] focus-visible:outline-none focus-visible:after:outline focus-visible:after:outline-2 focus-visible:after:outline-offset-[-2px] focus-visible:after:outline-cyan"
+                      className="min-w-0 flex-1 text-left"
                       aria-expanded={isExpanded}
                     >
                       <div className="flex items-start justify-between gap-3">
                         <div className="min-w-0">
-                          <p className="break-words font-mono text-sm font-medium leading-6 text-ink [overflow-wrap:anywhere]">
+                          <p className="text-sm text-ink-muted">
                             {cert.name}
                           </p>
 
-                          <p className="mt-1 break-words text-xs leading-5 text-ink-muted">
+                          <p className="mt-0.5 text-xs text-ink-faint">
                             {cert.issuer}
                           </p>
                         </div>
@@ -157,7 +157,7 @@ export function Certifications() {
                       >
                         <div className="min-h-0 overflow-hidden">
                           {cert.note && (
-                            <p className="pt-3 break-words text-sm leading-6 text-ink-muted [overflow-wrap:anywhere]">
+                            <p className="pt-2 text-2xs italic leading-relaxed text-ink-faint">
                               {cert.note}
                             </p>
                           )}
@@ -174,20 +174,20 @@ export function Certifications() {
 
       {selectedImage && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/90 px-4 pb-4 pt-20 sm:px-6 sm:pb-6"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
           onClick={() => setSelectedImage(null)}
         >
           <button
             type="button"
             onClick={() => setSelectedImage(null)}
-            className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-md border border-line bg-panel text-ink transition-colors hover:bg-raised hover:text-cyan focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
+            className="absolute right-5 top-5 rounded-md border border-line bg-panel p-2 text-ink hover:text-cyan"
             aria-label="Close certificate"
           >
             <X className="h-5 w-5" />
           </button>
 
           <div
-            className="relative min-w-0 max-w-5xl rounded-lg border border-line bg-panel p-2"
+            className="relative max-h-[90vh] max-w-5xl"
             onClick={(e) => e.stopPropagation()}
           >
             <Image
@@ -195,7 +195,7 @@ export function Certifications() {
               alt="Certificate"
               width={1400}
               height={1000}
-              className="max-h-[calc(100dvh-7rem)] w-auto max-w-full rounded-md object-contain"
+              className="max-h-[90vh] w-auto rounded-md object-contain"
             />
           </div>
         </div>

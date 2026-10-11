@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { scrollProgress } from "@/lib/sceneStore";
@@ -11,7 +11,7 @@ interface SceneContentProps {
   reducedMotion: boolean;
 }
 
-function ParticleField({ count }: { count: number }) {
+function ParticleField({ count, color, reducedMotion }: { count: number; color: string; reducedMotion: boolean }) {
   const pointsRef = useRef<THREE.Points>(null);
 
   const positions = useMemo(() => {
@@ -25,7 +25,7 @@ function ParticleField({ count }: { count: number }) {
   }, [count]);
 
   useFrame((_, delta) => {
-    if (pointsRef.current) {
+    if (pointsRef.current && !reducedMotion) {
       // A slow, near-imperceptible drift — "ambient", not "active".
       pointsRef.current.rotation.y += delta * 0.015;
     }
@@ -36,12 +36,12 @@ function ParticleField({ count }: { count: number }) {
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" args={[positions, 3]} />
       </bufferGeometry>
-      <pointsMaterial size={0.035} color="#5fd98a" transparent opacity={0.5} sizeAttenuation />
+      <pointsMaterial size={0.035} color={color} transparent opacity={0.5} sizeAttenuation />
     </points>
   );
 }
 
-function GridFloor() {
+function GridFloor({ color }: { color: string }) {
   const ref = useRef<THREE.GridHelper>(null);
 
   useEffect(() => {
@@ -59,7 +59,7 @@ function GridFloor() {
   // line down the middle of the whole page (the grid is a persistent
   // full-viewport background). Using the same color for both params
   // removes that distinction without removing the grid itself.
-  return <gridHelper ref={ref} args={[44, 36, "#1a1f1b", "#181d1a"]} position={[0, -3.4, 0]} />;
+  return <gridHelper ref={ref} args={[44, 36, color, color]} position={[0, -3.4, 0]} />;
 }
 
 interface NodeDatum {
@@ -68,7 +68,7 @@ interface NodeDatum {
   offset: number;
 }
 
-function NetworkNodes({ count }: { count: number }) {
+function NetworkNodes({ count, color, reducedMotion }: { count: number; color: string; reducedMotion: boolean }) {
   const group = useRef<THREE.Group>(null);
 
   const nodes = useMemo<NodeDatum[]>(
@@ -87,7 +87,7 @@ function NetworkNodes({ count }: { count: number }) {
 
   useFrame(({ clock }) => {
     const g = group.current;
-    if (!g) return;
+    if (!g || reducedMotion) return;
     g.children.forEach((child, i) => {
       const n = nodes[i];
       if (!n) return;
@@ -102,7 +102,7 @@ function NetworkNodes({ count }: { count: number }) {
       {nodes.map((n, i) => (
         <mesh key={i} position={n.position}>
           <icosahedronGeometry args={[0.28, 0]} />
-          <meshBasicMaterial color="#5ac8d8" wireframe transparent opacity={0.32} />
+          <meshBasicMaterial color={color} wireframe transparent opacity={0.32} />
         </mesh>
       ))}
     </group>
@@ -127,11 +127,24 @@ function CameraRig({ enabled }: { enabled: boolean }) {
  * destroying and recreating the Three.js scene.
  */
 export function SceneContent({ config, reducedMotion }: SceneContentProps) {
+  const [colors, setColors] = useState<{ particle: string; grid: string; node: string } | null>(null);
+
+  useEffect(() => {
+    const styles = getComputedStyle(document.documentElement);
+    setColors({
+      particle: styles.getPropertyValue("--c-ink-faint").trim(),
+      grid: styles.getPropertyValue("--c-line").trim(),
+      node: styles.getPropertyValue("--c-cyan").trim(),
+    });
+  }, []);
+
+  if (!colors) return null;
+
   return (
     <>
-      <ParticleField key={`particles-${config.particleCount}`} count={config.particleCount} />
-      {config.showGrid && <GridFloor />}
-      <NetworkNodes key={`nodes-${config.nodeCount}`} count={config.nodeCount} />
+      <ParticleField key={`particles-${config.particleCount}`} count={config.particleCount} color={colors.particle} reducedMotion={reducedMotion} />
+      {config.showGrid && <GridFloor color={colors.grid} />}
+      <NetworkNodes key={`nodes-${config.nodeCount}`} count={config.nodeCount} color={colors.node} reducedMotion={reducedMotion} />
       <CameraRig enabled={config.cameraDrift && !reducedMotion} />
     </>
   );

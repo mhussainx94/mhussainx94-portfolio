@@ -49,7 +49,7 @@ function ProgressBar() {
     >
       <div
         ref={barRef}
-        className="h-full origin-left bg-signal"
+        className="h-full origin-left bg-cyan"
         style={{ transform: "scaleX(0)" }}
       />
     </div>
@@ -76,15 +76,14 @@ export function SiteNav() {
           max-w-xl
           -translate-x-1/2
           items-center
-          justify-center
+          justify-start
           overflow-x-auto
-          rounded-full
+          rounded-md
           border
           border-line
-          bg-void/90
+          bg-panel
           px-2
           py-2
-          backdrop-blur-md
           lg:hidden
         "
       >
@@ -98,10 +97,10 @@ export function SiteNav() {
                 href={`#${item.id}`}
                 aria-current={isActive ? "true" : undefined}
                 className={cn(
-                  "whitespace-nowrap rounded-full px-2.5 py-1.5 font-mono text-[9px] transition-colors sm:px-3 sm:text-2xs",
+                  "whitespace-nowrap rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-cyan px-2.5 py-1.5 font-mono text-xs transition-colors sm:px-3 sm:text-xs",
                   isActive
-                    ? "bg-signal text-void"
-                    : "text-ink-faint hover:text-signal"
+                    ? "bg-raised text-cyan"
+                    : "text-ink-muted hover:text-cyan"
                 )}
               >
                 {item.label}
@@ -134,13 +133,13 @@ export function SiteNav() {
             <a
               key={item.id}
               href={`#${item.id}`}
-              className="group flex items-center gap-2.5"
+              className="group flex items-center gap-2.5 rounded-sm text-ink-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan"
               aria-current={isActive ? "true" : undefined}
             >
               <span
                 className={cn(
                   "font-mono text-2xs opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100",
-                  isActive && "text-signal opacity-100"
+                  isActive && "text-cyan opacity-100"
                 )}
               >
                 {item.label}
@@ -150,8 +149,8 @@ export function SiteNav() {
                 className={cn(
                   "h-1.5 w-1.5 rounded-full border transition-colors",
                   isActive
-                    ? "border-signal bg-signal"
-                    : "border-line-strong bg-transparent group-hover:border-signal"
+                    ? "border-cyan bg-cyan"
+                    : "border-line-strong bg-transparent group-hover:border-cyan"
                 )}
               />
             </a>

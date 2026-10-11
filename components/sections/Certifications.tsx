@@ -75,12 +75,12 @@ export function Certifications() {
                   </div>
                 </button>
 
-                <div className="col-start-2 flex min-w-0 flex-wrap items-center gap-2 sm:col-start-3 sm:row-start-1">
+                <div className="col-start-2 flex min-w-0 flex-wrap items-center gap-3 sm:col-start-3 sm:row-start-1">
                   {cert.imageUrl && (
                     <button
                       type="button"
                       onClick={() => setSelectedImage(cert.imageUrl!)}
-                      className="inline-flex min-h-10 items-center justify-center rounded-md border border-line bg-void px-3 font-mono text-xs text-cyan underline-offset-4 transition-colors hover:bg-raised hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
+                      className="font-mono text-2xs text-cyan underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
                     >
                       view
                     </button>
@@ -91,7 +91,7 @@ export function Certifications() {
                       href={cert.credentialUrl}
                       target="_blank"
                       rel="noreferrer noopener"
-                      className="inline-flex min-h-10 items-center justify-center rounded-md border border-line bg-void px-3 font-mono text-xs text-cyan underline-offset-4 transition-colors hover:bg-raised hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
+                      className="font-mono text-2xs text-cyan underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
                     >
                       verify
                     </a>

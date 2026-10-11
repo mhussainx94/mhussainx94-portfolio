@@ -27,7 +27,7 @@ export function SceneCanvas() {
   if (!webglReady) return <Fallback2D />;
 
   return (
-    <div className="pointer-events-none fixed inset-0 -z-10 opacity-70" aria-hidden="true">
+    <div className="pointer-events-none fixed inset-0 -z-10 opacity-40" aria-hidden="true">
       <Canvas
         dpr={config.dpr}
         gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}

@@ -95,7 +95,7 @@ export function Hero({ reducedMotion, nextSectionId }: HeroProps) {
           font-medium
           leading-none
           tracking-tight
-          text-ink
+          text-cyan
         "
         style={{
           fontSize: "clamp(2.2rem, 11vw, 7rem)",
@@ -157,16 +157,16 @@ export function Hero({ reducedMotion, nextSectionId }: HeroProps) {
           flex-col
           items-center
           gap-1
-          text-ink-faint
+          text-ink-muted
           sm:bottom-8
         "
       >
-        <span className="font-mono text-2xs">
+        <span className="font-mono text-xs">
           scroll
         </span>
 
         <ChevronDown
-          className="h-3.5 w-3.5 animate-glow-pulse"
+          className="h-3.5 w-3.5"
           aria-hidden="true"
         />
       </div>

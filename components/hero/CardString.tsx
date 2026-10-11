@@ -105,7 +105,7 @@ export function CardString({ anchorRef, cardRef }: CardStringProps) {
   return (
     <div ref={wrapperRef} className="pointer-events-none absolute inset-0" aria-hidden="true">
       <svg ref={svgRef} className="h-full w-full overflow-visible">
-        <path ref={pathRef} fill="none" stroke="rgba(138,147,140,0.5)" strokeWidth={1.3} />
+        <path ref={pathRef} fill="none" stroke="var(--c-ink-faint)" strokeOpacity={0.5} strokeWidth={1.3} />
       </svg>
     </div>
   );

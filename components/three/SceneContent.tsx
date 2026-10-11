@@ -36,7 +36,7 @@ function ParticleField({ count, color, reducedMotion }: { count: number; color: 
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" args={[positions, 3]} />
       </bufferGeometry>
-      <pointsMaterial size={0.035} color={color} transparent opacity={0.2} sizeAttenuation />
+      <pointsMaterial size={0.035} color={color} transparent opacity={0.5} sizeAttenuation />
     </points>
   );
 }
@@ -49,7 +49,7 @@ function GridFloor({ color }: { color: string }) {
     if (!helper) return;
     const material = Array.isArray(helper.material) ? helper.material[0] : helper.material;
     material.transparent = true;
-    material.opacity = 0.1;
+    material.opacity = 0.16;
   }, []);
 
   // THREE.GridHelper's constructor is (size, divisions, colorCenterLine,
@@ -102,7 +102,7 @@ function NetworkNodes({ count, color, reducedMotion }: { count: number; color: s
       {nodes.map((n, i) => (
         <mesh key={i} position={n.position}>
           <icosahedronGeometry args={[0.28, 0]} />
-          <meshBasicMaterial color={color} wireframe transparent opacity={0.12} />
+          <meshBasicMaterial color={color} wireframe transparent opacity={0.32} />
         </mesh>
       ))}
     </group>

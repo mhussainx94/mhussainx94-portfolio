@@ -26,7 +26,7 @@ export function Certifications() {
           const isExpanded = expandedCert === cert.id;
 
           return (
-            <div key={cert.id} className="px-4 py-5 sm:px-5">
+            <div key={cert.id} className="relative px-4 py-5 sm:px-5">
               <div className="grid min-w-0 grid-cols-[auto_minmax(0,1fr)] items-start gap-x-3 gap-y-3 sm:grid-cols-[auto_minmax(0,1fr)_auto]">
                 <CheckCircle2
                   className="mt-0.5 h-4 w-4 shrink-0 text-signal"
@@ -36,7 +36,7 @@ export function Certifications() {
                 <button
                   type="button"
                   onClick={() => toggleCertificate(cert.id)}
-                  className="min-w-0 flex-1 rounded-sm text-left transition-colors hover:bg-raised focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
+                  className="min-w-0 flex-1 rounded-sm text-left after:absolute after:inset-0 after:cursor-pointer after:rounded-sm after:content-[''] focus-visible:outline-none focus-visible:after:outline focus-visible:after:outline-2 focus-visible:after:outline-offset-[-2px] focus-visible:after:outline-cyan"
                   aria-expanded={isExpanded}
                 >
                   <div className="flex items-start justify-between gap-3">
@@ -80,7 +80,7 @@ export function Certifications() {
                     <button
                       type="button"
                       onClick={() => setSelectedImage(cert.imageUrl!)}
-                      className="font-mono text-2xs text-cyan underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
+                      className="relative z-10 font-mono text-2xs text-cyan underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
                     >
                       view
                     </button>
@@ -91,7 +91,7 @@ export function Certifications() {
                       href={cert.credentialUrl}
                       target="_blank"
                       rel="noreferrer noopener"
-                      className="font-mono text-2xs text-cyan underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
+                      className="relative z-10 font-mono text-2xs text-cyan underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
                     >
                       verify
                     </a>
@@ -114,7 +114,7 @@ export function Certifications() {
               const isExpanded = expandedCert === cert.id;
 
               return (
-                <div key={cert.id} className="px-4 py-4 sm:px-5">
+                <div key={cert.id} className="relative px-4 py-4 sm:px-5">
                   <div className="flex items-start gap-3">
                     <CircleDashed
                       className="mt-0.5 h-4 w-4 shrink-0 text-ink-faint"
@@ -124,7 +124,7 @@ export function Certifications() {
                     <button
                       type="button"
                       onClick={() => toggleCertificate(cert.id)}
-                      className="min-w-0 flex-1 rounded-sm text-left transition-colors hover:bg-raised focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
+                      className="min-w-0 flex-1 rounded-sm text-left after:absolute after:inset-0 after:cursor-pointer after:rounded-sm after:content-[''] focus-visible:outline-none focus-visible:after:outline focus-visible:after:outline-2 focus-visible:after:outline-offset-[-2px] focus-visible:after:outline-cyan"
                       aria-expanded={isExpanded}
                     >
                       <div className="flex items-start justify-between gap-3">

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import type { ReactNode, RefObject } from "react";
-import { Container } from "@/components/ui/Primitives";
+import { CommandLabel, Container } from "@/components/ui/Primitives";
 import { ensureGsapRegistered, gsap } from "@/lib/gsap";
 import type { SectionId } from "@/types";
 
@@ -83,9 +83,7 @@ export function SectionShell({
                 {String(index).padStart(2, "0")}
               </p>
 
-              <p className="mt-1 break-words font-mono text-2xs leading-relaxed text-ink-muted">
-                {command}
-              </p>
+              <CommandLabel className="mt-2">{command}</CommandLabel>
             </div>
           </div>
 
@@ -95,9 +93,7 @@ export function SectionShell({
             className="min-w-0 w-full"
           >
             {/* Mobile command */}
-            <p className="mb-5 break-words font-mono text-2xs leading-relaxed text-ink-muted sm:hidden">
-              {command}
-            </p>
+            <CommandLabel className="mb-5 sm:hidden">{command}</CommandLabel>
 
             {children}
           </div>

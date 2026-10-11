@@ -7,8 +7,8 @@ export function Container({ children, className }: { children: ReactNode; classN
 
 export function CommandLabel({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <p className={cn("font-mono text-2xs text-signal", className)}>
-      <span className="text-ink-faint">$ </span>
+    <p className={cn("min-w-0 break-words font-mono text-xs leading-relaxed text-signal [overflow-wrap:anywhere]", className)}>
+      <span aria-hidden="true">$ </span>
       {children}
     </p>
   );
@@ -22,8 +22,8 @@ export function SectionHeading({
   description?: string;
 }) {
   return (
-    <div className="mb-10 sm:mb-12">
-      <h2 className="font-mono text-2xl font-medium text-ink sm:text-3xl">{title}</h2>
+    <div className="mb-6 border-b border-line pb-5 sm:mb-8">
+      <h2 className="break-words font-mono text-2xl font-medium leading-snug text-cyan sm:text-3xl">{title}</h2>
       {description && <p className="mt-3 max-w-measure text-sm leading-relaxed text-ink-muted">{description}</p>}
     </div>
   );

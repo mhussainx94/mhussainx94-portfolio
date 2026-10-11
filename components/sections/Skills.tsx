@@ -6,28 +6,24 @@ export function Skills() {
     <>
       <SectionHeading title="Skills" />
 
-      <div
-        className="
-          grid
-          min-w-0
-          grid-cols-1
-          gap-7
-          sm:grid-cols-2
-          sm:gap-8
-          lg:gap-10
-        "
-      >
+      <div className="grid min-w-0 grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2 lg:gap-x-10">
         {skillGroups.map((group) => (
-          <div key={group.id} className="min-w-0">
+          <div key={group.id} className="min-w-0 border-t border-line pt-5">
             <CommandLabel>{group.command}</CommandLabel>
 
-            <p className="mt-2 break-words text-sm leading-relaxed text-ink">
+            <h3 className="mt-2 break-words font-mono text-sm font-medium leading-6 text-cyan [overflow-wrap:anywhere]">
               {group.label}
-            </p>
+            </h3>
 
             <div className="mt-4 flex min-w-0 flex-wrap gap-2">
               {group.skills.map((skill) => (
-                <Chip key={skill}>{skill}</Chip>
+                <Chip
+                  key={skill}
+                  size="md"
+                  className="min-w-0 max-w-full break-words bg-panel leading-5 [overflow-wrap:anywhere]"
+                >
+                  {skill}
+                </Chip>
               ))}
             </div>
           </div>

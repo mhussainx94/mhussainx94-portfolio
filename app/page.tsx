@@ -148,15 +148,15 @@ export default function Home() {
           <Contact />
         </SectionShell>
 
-        <footer className="border-t border-line py-10">
+        <footer className="border-t border-line bg-void py-8 sm:py-10">
           <Container>
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <p className="font-mono text-2xs text-ink-faint">
+            <div className="flex min-w-0 flex-wrap items-center justify-between gap-x-6 gap-y-3">
+              <p className="min-w-0 break-words font-mono text-xs leading-6 text-ink-muted [overflow-wrap:anywhere]">
                 © {new Date().getFullYear()} {profile.name}
               </p>
               <a
                 href="#hero"
-                className="font-mono text-2xs text-ink-faint transition-colors hover:text-signal"
+                className="rounded-sm font-mono text-xs leading-6 text-cyan underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan"
               >
                 back to top ↑
               </a>

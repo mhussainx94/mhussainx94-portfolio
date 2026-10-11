@@ -82,7 +82,6 @@ export default function Home() {
           id="about"
           index={1}
           command="cat about.txt"
-          showCommand={false}
           sectionRef={aboutRef}
           reducedMotion={reducedMotion}
         >

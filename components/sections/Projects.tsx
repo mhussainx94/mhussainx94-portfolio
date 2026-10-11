@@ -19,37 +19,37 @@ function ProjectCard({ project, reducedMotion }: ProjectCardProps) {
       whileTap={reducedMotion ? undefined : { scale: 0.995 }}
       transition={{ duration: 0.2, ease: "easeOut" }}
       className={cn(
-        "group flex min-w-0 h-full flex-col rounded-md border border-line bg-panel p-4 transition-colors sm:p-5 md:p-6",
-        "hover:border-signal/40",
+        "group flex min-w-0 h-full flex-col rounded-xl border border-line bg-panel p-4 transition-colors sm:p-5 md:p-6",
+        "hover:border-line-strong",
         project.featured && "sm:col-span-2"
       )}
     >
       <div className="flex min-w-0 items-start justify-between gap-4">
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-            <p className="font-mono text-2xs uppercase tracking-[0.16em] text-signal">
+            <p className="break-words font-mono text-xs leading-5 text-ink-muted">
               {project.projectType}
             </p>
             {project.status === "in-progress" && (
-              <span className="font-mono text-2xs uppercase tracking-[0.12em] text-cyan">
+              <span className="font-mono text-xs leading-5 text-signal">
                 • active
               </span>
             )}
           </div>
 
-          <h3 className="mt-2 min-w-0 break-words font-mono text-base leading-snug text-ink sm:text-lg">
+          <h3 className="mt-2 min-w-0 break-words font-mono text-base font-medium leading-7 text-cyan [overflow-wrap:anywhere] sm:text-lg">
             {project.title}
           </h3>
         </div>
       </div>
 
-      <p className="mt-3 min-w-0 flex-1 break-words text-sm leading-6 text-ink-muted">
+      <p className="mt-3 min-w-0 flex-1 break-words text-sm leading-6 text-ink-muted [overflow-wrap:anywhere]">
         {project.description}
       </p>
 
       <div className="mt-5 flex min-w-0 flex-wrap gap-2">
         {project.technologies.map((tech) => (
-          <Chip key={tech}>{tech}</Chip>
+          <Chip key={tech} size="md" className="min-w-0 max-w-full break-words bg-void leading-5 [overflow-wrap:anywhere]">{tech}</Chip>
         ))}
       </div>
 
@@ -61,7 +61,7 @@ function ProjectCard({ project, reducedMotion }: ProjectCardProps) {
               target="_blank"
               rel="noreferrer noopener"
               aria-label={"View " + project.title + " source code on GitHub"}
-              className="inline-flex min-h-8 items-center gap-1.5 font-mono text-2xs uppercase tracking-[0.1em] text-ink-muted transition-colors hover:text-signal"
+              className="inline-flex min-h-11 items-center gap-2 rounded-sm font-mono text-xs text-cyan underline-offset-4 transition-colors hover:text-ink hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
             >
               <Github className="h-3.5 w-3.5" aria-hidden="true" />
               GitHub
@@ -74,7 +74,7 @@ function ProjectCard({ project, reducedMotion }: ProjectCardProps) {
               target="_blank"
               rel="noreferrer noopener"
               aria-label={"Open " + project.title + " live demo"}
-              className="inline-flex min-h-8 items-center gap-1.5 font-mono text-2xs uppercase tracking-[0.1em] text-ink-muted transition-colors hover:text-signal"
+              className="inline-flex min-h-11 items-center gap-2 rounded-sm font-mono text-xs text-cyan underline-offset-4 transition-colors hover:text-ink hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
             >
               <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
               Live demo

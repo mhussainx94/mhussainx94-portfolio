@@ -29,9 +29,9 @@ export function SectionHeading({
   );
 }
 
-export function Chip({ children }: { children: ReactNode }) {
+export function Chip({ children, className, size = "sm" }: { children: ReactNode; className?: string; size?: "sm" | "md" }) {
   return (
-    <span className="inline-flex items-center rounded border border-line px-2.5 py-1 font-mono text-2xs text-ink-muted">
+    <span className={cn("inline-flex items-center rounded border border-line px-2.5 py-1 font-mono text-ink-muted", size === "md" ? "text-xs" : "text-2xs", className)}>
       {children}
     </span>
   );

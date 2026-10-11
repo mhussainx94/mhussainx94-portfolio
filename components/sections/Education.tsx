@@ -1,3 +1,5 @@
+"use client";
+
 import { ChevronDown, GraduationCap } from "lucide-react";
 import { SectionHeading, Chip } from "@/components/ui/Primitives";
 import { education } from "@/data/education";
@@ -6,6 +8,7 @@ import { useState } from "react";
 
 export function Education() {
   const [showLearned, setShowLearned] = useState(false);
+  const [expandedProject, setExpandedProject] = useState<string | null>(null);
 
   return (
     <>
@@ -13,23 +16,23 @@ export function Education() {
 
       <div className="space-y-8">
         {education.map((entry) => (
-          <div key={entry.id} className="rounded-md border border-line bg-panel p-4 sm:p-6">
+          <div key={entry.id} className="min-w-0 rounded-xl border border-line bg-panel p-4 sm:p-6">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
               <div className="flex min-w-0 items-start gap-3">
                 <GraduationCap
-                  className="mt-1 h-4 w-4 shrink-0 text-signal"
+                  className="mt-1 h-4 w-4 shrink-0 text-cyan"
                   aria-hidden="true"
                 />
                 <div className="min-w-0">
-                  <p className="font-mono text-base text-ink sm:text-lg">
+                  <p className="break-words font-mono text-base font-medium leading-relaxed text-cyan sm:text-lg">
                     {entry.degree} {entry.field}
                   </p>
-                  <p className="mt-1 text-sm text-ink-muted">{entry.institution}</p>
-                  <p className="mt-1 text-xs text-ink-faint">{entry.location}</p>
+                  <p className="mt-1 break-words text-sm leading-6 text-ink">{entry.institution}</p>
+                  <p className="mt-1 break-words text-xs leading-5 text-ink-muted">{entry.location}</p>
                 </div>
               </div>
 
-              <p className="shrink-0 font-mono text-2xs text-ink-faint sm:text-right">
+              <p className="shrink-0 font-mono text-xs leading-6 text-ink-muted sm:text-right">
                 {formatMonthYear(entry.startDate)} – {entry.endDate}
               </p>
             </div>
@@ -37,7 +40,7 @@ export function Education() {
             {entry.universityProjects && entry.universityProjects.length > 0 && (
               <div className="mt-6 border-t border-line pt-5">
                 <div className="mb-3">
-                  <p className="font-mono text-2xs uppercase tracking-[0.18em] text-signal">
+                  <p className="font-mono text-xs uppercase tracking-[0.12em] text-cyan">
                     University Projects
                   </p>
                   <p className="mt-1 text-xs text-ink-faint">
@@ -46,34 +49,42 @@ export function Education() {
                 </div>
 
                 <div className="space-y-2">
-                  {entry.universityProjects.map((project) => (
-                    <details
-                      key={project.id}
-                      className="group rounded-md border border-line/80 bg-void/20"
-                    >
-                      <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-3 py-3 font-mono text-xs text-ink marker:hidden [&::-webkit-details-marker]:hidden">
-                        <span className="min-w-0 break-words">{project.title}</span>
-                        <ChevronDown
-                          className="h-4 w-4 shrink-0 text-ink-faint transition-transform duration-200 group-open:rotate-180"
-                          aria-hidden="true"
-                        />
-                      </summary>
+                  {entry.universityProjects.map((project) => {
+                    const projectKey = `${entry.id}:${project.id}`;
+                    const isExpanded = expandedProject === projectKey;
+                    const panelId = `education-${entry.id}-${project.id}-description`;
 
-                      <div className="border-t border-line/80 px-3 pb-3 pt-3">
-                        <p className="text-xs leading-relaxed text-ink-muted">
-                          {project.description}
-                        </p>
+                    return (
+                      <div key={project.id} className="min-w-0 rounded-md border border-line bg-void">
+                        <button
+                          type="button"
+                          aria-expanded={isExpanded}
+                          aria-controls={panelId}
+                          onClick={() => setExpandedProject((current) => current === projectKey ? null : projectKey)}
+                          className="flex min-h-12 w-full min-w-0 items-center justify-between gap-3 rounded-md px-4 py-3 text-left font-mono text-sm leading-6 text-ink transition-colors hover:bg-raised hover:text-cyan focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
+                        >
+                          <span className="min-w-0 break-words [overflow-wrap:anywhere]">{project.title}</span>
+                          <ChevronDown
+                            className={`h-4 w-4 shrink-0 text-ink-muted transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}
+                            aria-hidden="true"
+                          />
+                        </button>
 
-                        {project.technologies && project.technologies.length > 0 && (
-                          <div className="mt-3 flex flex-wrap gap-2">
-                            {project.technologies.map((technology) => (
-                              <Chip key={technology}>{technology}</Chip>
-                            ))}
-                          </div>
-                        )}
+                        <div id={panelId} hidden={!isExpanded} className="min-w-0 border-t border-line px-4 pb-4 pt-3">
+                          <p className="break-words text-sm leading-6 text-ink-muted [overflow-wrap:anywhere]">
+                            {project.description}
+                          </p>
+                          {project.technologies && project.technologies.length > 0 && (
+                            <div className="mt-4 flex min-w-0 flex-wrap gap-2">
+                              {project.technologies.map((technology) => (
+                                <Chip key={technology}>{technology}</Chip>
+                              ))}
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    </details>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             )}
@@ -83,10 +94,10 @@ export function Education() {
                 type="button"
                 onClick={() => setShowLearned((current) => !current)}
                 aria-expanded={showLearned}
-                className="flex w-full items-center justify-between gap-3 rounded-md border border-line px-3 py-3 text-left transition-colors hover:border-signal/60 hover:text-signal focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-signal"
+                className="flex min-h-12 w-full min-w-0 items-center justify-between gap-3 rounded-md border border-line bg-void px-4 py-3 text-left transition-colors hover:bg-raised focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
               >
                 <span>
-                  <span className="block font-mono text-2xs uppercase tracking-[0.18em] text-ink">
+                  <span className="block font-mono text-xs uppercase tracking-[0.12em] text-cyan">
                     Courses Learned
                   </span>
                   <span className="mt-1 block text-xs text-ink-faint">

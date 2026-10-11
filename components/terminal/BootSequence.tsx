@@ -28,12 +28,12 @@ export function BootSequence({ reducedMotion, id }: BootSequenceProps) {
         containerRef.current?.querySelectorAll<HTMLElement>(".boot-line") ?? []
       );
       if (lines.length === 0) return;
-      gsap.set(lines, { width: 0 });
+      gsap.set(lines, { opacity: 0 });
       const timeline = gsap.timeline({
         scrollTrigger: { trigger: containerRef.current, start: "top 75%", once: true },
       });
       lines.forEach((line, i) => {
-        timeline.to(line, { width: "auto", duration: 0.55, ease: "steps(20)" }, i * 0.32);
+        timeline.to(line, { opacity: 1, duration: 0.35, ease: "power1.out" }, i * 0.32);
       });
     }, containerRef);
 
@@ -44,13 +44,13 @@ export function BootSequence({ reducedMotion, id }: BootSequenceProps) {
     <div id={id} ref={containerRef} className="mx-auto max-w-measure px-6 py-20 sm:py-28">
       <TerminalWindow command="whoami">
         <div className="space-y-2">
-          <p className="boot-line overflow-hidden whitespace-nowrap font-mono text-sm text-signal sm:text-base">
+          <p className="boot-line break-words [overflow-wrap:anywhere] font-mono text-sm text-signal sm:text-base">
             {profile.name.toLowerCase()}@{profile.handle}
           </p>
-          <p className="boot-line overflow-hidden whitespace-nowrap font-mono text-sm text-ink-muted">
+          <p className="boot-line break-words [overflow-wrap:anywhere] font-mono text-sm text-ink-muted">
             role: {profile.title}
           </p>
-          <p className="boot-line overflow-hidden whitespace-nowrap font-mono text-sm text-ink-muted">
+          <p className="boot-line break-words [overflow-wrap:anywhere] font-mono text-sm text-ink-muted">
             location: {profile.location}
           </p>
         </div>

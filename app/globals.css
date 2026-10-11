@@ -33,6 +33,11 @@
 
   --c-cyan: #79c0ff;
   --c-cyan-dim: #234158;
+
+  /* Decorative terminal window dots; never used as text colours. */
+  --c-window-red: #f47067;
+  --c-window-yellow: #e3b341;
+  --c-window-green: #57ab5a;
 }
 
 html {

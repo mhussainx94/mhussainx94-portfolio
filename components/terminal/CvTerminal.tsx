@@ -122,37 +122,37 @@ export function CvTerminal({ reducedMotion }: { reducedMotion: boolean }) {
   return (
     <div ref={containerRef} className="border-t border-line py-10 sm:py-14">
       <div className="mx-auto w-full max-w-5xl px-6">
-        <div className="max-w-lg">
-          <TerminalWindow command={`sudo apt install ${profile.handle}-cv`}>
+        <div className="min-w-0 max-w-lg">
+          <TerminalWindow command={`sudo apt install ${profile.handle}-cv`} title={`visitor@${profile.handle}: ~/cv`}>
             {phase === "idle" && (
               <button
                 type="button"
                 onClick={runSequence}
                 aria-label={`Run sudo apt install ${profile.handle}-cv — downloads the CV as a PDF`}
-                className="group flex w-full items-center justify-between gap-3 rounded border border-line px-4 py-3 text-left outline-none transition-colors hover:border-signal focus-visible:ring-2 focus-visible:ring-signal focus-visible:ring-offset-2 focus-visible:ring-offset-void"
+                className="group flex min-h-12 w-full min-w-0 items-center justify-between gap-3 rounded-md border border-line-strong bg-void px-4 py-3 text-left transition-colors hover:border-cyan hover:bg-raised focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan"
               >
-                <span className="font-mono text-sm text-ink">
-                  <span className="text-ink-faint">$ </span>
+                <span className="min-w-0 break-words font-mono text-sm leading-6 text-ink [overflow-wrap:anywhere]">
+                  <span className="text-signal" aria-hidden="true">$ </span>
                   sudo apt install {profile.handle}-cv
                 </span>
                 <Download
-                  className="h-4 w-4 shrink-0 text-ink-faint transition-colors group-hover:text-signal"
+                  className="h-4 w-4 shrink-0 text-cyan"
                   aria-hidden="true"
                 />
               </button>
             )}
 
             {phase === "installing" && (
-              <div aria-live="polite" className="space-y-1.5 font-mono text-xs text-ink-muted sm:text-sm">
+              <div aria-live="polite" className="min-w-0 space-y-2 break-words font-mono text-sm leading-6 text-ink-muted [overflow-wrap:anywhere]">
                 {SEQUENCE_LINES.slice(0, visibleLines).map((line) => (
                   <p key={line}>{line}</p>
                 ))}
                 {visibleLines >= SEQUENCE_LINES.length && (
                   <div className="flex items-center gap-2 pt-1">
-                    <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-raised">
+                    <div className="h-1.5 min-w-0 flex-1 overflow-hidden rounded-full bg-line-strong">
                       <div className="h-full bg-signal" style={{ width: `${progress}%` }} />
                     </div>
-                    <span className="w-9 shrink-0 text-right text-2xs tabular-nums text-ink-faint">
+                    <span className="w-10 shrink-0 text-right text-xs tabular-nums text-ink-muted">
                       {progress}%
                     </span>
                   </div>
@@ -161,9 +161,9 @@ export function CvTerminal({ reducedMotion }: { reducedMotion: boolean }) {
             )}
 
             {phase === "done" && (
-              <div aria-live="polite" className="space-y-1.5 font-mono text-xs sm:text-sm">
-                <p className="flex items-center gap-1.5 text-signal">
-                  <CheckCircle2 className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+              <div aria-live="polite" className="min-w-0 space-y-2 break-words font-mono text-sm leading-6 [overflow-wrap:anywhere]">
+                <p className="flex min-w-0 items-start gap-2 text-signal">
+                  <CheckCircle2 className="mt-1 h-4 w-4 shrink-0" aria-hidden="true" />
                   {profile.handle}-cv installed
                 </p>
                 <p className="text-ink-muted">→ Downloading CV...</p>
@@ -171,9 +171,9 @@ export function CvTerminal({ reducedMotion }: { reducedMotion: boolean }) {
             )}
 
             {phase === "not-found" && (
-              <div aria-live="polite" className="space-y-1.5 font-mono text-xs text-ink-faint sm:text-sm">
-                <p className="flex items-center gap-1.5">
-                  <TerminalSquare className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+              <div aria-live="polite" className="min-w-0 space-y-2 break-words font-mono text-sm leading-6 text-ink-muted [overflow-wrap:anywhere]">
+                <p className="flex min-w-0 items-start gap-2">
+                  <TerminalSquare className="mt-1 h-4 w-4 shrink-0" aria-hidden="true" />
                   {profile.handle}-cv: package not found
                 </p>
                 <p>Add the PDF at {profile.cvUrl ?? "/Muhammad-Hussain-CV.pdf"} to enable this.</p>

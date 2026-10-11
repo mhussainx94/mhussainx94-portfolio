@@ -14,25 +14,25 @@
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 
-  /* Design tokens — desaturated "phosphor" terminal palette rather
-     than neon-on-black. See README > Design system for the rationale
-     behind each value. */
-  --c-void: #0a0c0b;
-  --c-panel: #121512;
-  --c-raised: #191d1a;
-  --c-line: #242a25;
-  --c-line-strong: #333b34;
+  /* Shared terminal palette: neutral surfaces, off-white text,
+     light-blue accents, and restrained green commands/status.
+     Dim accents are backgrounds, not small-text colours. */
+  --c-void: #0d1117;
+  --c-panel: #10151b;
+  --c-raised: #171d25;
+  --c-line: #30363d;
+  --c-line-strong: #484f58;
 
-  --c-ink: #e7ece8;
-  --c-ink-muted: #9aa39c;
-  --c-ink-faint: #6b736c;
+  --c-ink: #e6edf3;
+  --c-ink-muted: #a3adb8;
+  --c-ink-faint: #8b949e;
 
-  --c-signal: #5fd98a;
-  --c-signal-dim: #3a7350;
-  --c-signal-bright: #8ef0ae;
+  --c-signal: #7bcb95;
+  --c-signal-dim: #244832;
+  --c-signal-bright: #9cdbb0;
 
-  --c-cyan: #5ac8d8;
-  --c-cyan-dim: #2f6672;
+  --c-cyan: #79c0ff;
+  --c-cyan-dim: #234158;
 }
 
 html {

@@ -22,10 +22,10 @@ function ContactRow({ link }: { link: SocialLink }) {
       target={isExternal ? "_blank" : undefined}
       rel={isExternal ? "noreferrer noopener" : undefined}
       className={cn(
-        "group flex min-w-0 flex-col gap-2 border-b border-line py-4 transition-colors sm:flex-row sm:items-center sm:justify-between sm:gap-4",
+        "group flex min-w-0 flex-col gap-2 rounded-sm border-b border-line py-4 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan sm:flex-row sm:items-center sm:justify-between sm:gap-4",
         link.isPlaceholder
           ? "text-ink-faint"
-          : "text-ink hover:border-signal"
+          : "text-ink hover:border-line-strong"
       )}
     >
       <span className="flex min-w-0 items-center gap-3">
@@ -41,10 +41,10 @@ function ContactRow({ link }: { link: SocialLink }) {
 
       <span
         className={cn(
-          "min-w-0 break-all font-mono text-xs sm:text-right",
+          "min-w-0 break-words font-mono text-xs leading-6 underline-offset-4 [overflow-wrap:anywhere] sm:text-right",
           link.isPlaceholder
             ? "italic text-ink-faint"
-            : "text-ink-muted group-hover:text-signal"
+            : "text-cyan group-hover:underline"
         )}
       >
         {link.value}
@@ -70,7 +70,7 @@ export function Contact() {
         ))}
       </div>
 
-      <p className="mt-6 break-words font-mono text-2xs text-ink-faint sm:mt-8">
+      <p className="mt-6 break-words font-mono text-xs leading-6 text-ink-muted sm:mt-8">
         connection established — {profile.location}
       </p>
     </>

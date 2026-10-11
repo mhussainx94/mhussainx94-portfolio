@@ -41,12 +41,12 @@ export function HangingCard({ reducedMotion, onActivate, onCardElement }: Hangin
       onPointerUp={onPointerUp}
       onPointerCancel={onPointerCancel}
       onKeyDown={onKeyDown}
-      className="hanging-card w-56 touch-none select-none rounded-lg border border-line bg-panel p-5 text-left outline-none focus-visible:ring-2 focus-visible:ring-signal focus-visible:ring-offset-2 focus-visible:ring-offset-void sm:w-60"
+      className="hanging-card w-56 touch-none select-none max-w-full rounded-xl border border-line bg-panel p-5 text-left sm:w-60"
       style={{ willChange: "transform" }}
     >
-      <div className="mb-4 flex items-center gap-2 border-b border-line pb-3">
-        <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-signal animate-glow-pulse" />
-        <span className="truncate font-mono text-2xs text-ink-muted">root@{profile.handle}</span>
+      <div className="-mx-5 -mt-5 mb-4 flex items-center gap-2 rounded-t-xl border-b border-line bg-raised px-5 py-3">
+        <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-signal" aria-hidden="true" />
+        <span className="min-w-0 break-words font-mono text-xs leading-relaxed text-ink-muted [overflow-wrap:anywhere]">root@{profile.handle}</span>
       </div>
 
       {/* The photo is the card's main visual content now — see
@@ -54,7 +54,6 @@ export function HangingCard({ reducedMotion, onActivate, onCardElement }: Hangin
           a monogram + instructions until /public/avatar.jpg exists. */}
       <div
         className="relative aspect-[4/5] w-full overflow-hidden rounded-md border border-line-strong bg-raised"
-        style={{ boxShadow: "inset 0 0 0 1px rgba(95,217,138,0.16), 0 0 18px -6px rgba(95,217,138,0.3)" }}
       >
         {profile.photoUrl ? (
           <Image
@@ -67,7 +66,7 @@ export function HangingCard({ reducedMotion, onActivate, onCardElement }: Hangin
           />
         ) : (
           <div className="flex h-full w-full flex-col items-center justify-center gap-3 p-4 text-center">
-            <span className="flex h-16 w-16 items-center justify-center rounded-full border border-line-strong font-mono text-2xl text-signal">
+            <span className="flex h-16 w-16 items-center justify-center rounded-full border border-line-strong font-mono text-2xl text-cyan">
               {profile.name.charAt(0)}
             </span>
             <span className="font-mono text-2xs leading-snug text-ink-faint">

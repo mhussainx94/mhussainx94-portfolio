@@ -10,6 +10,8 @@ interface SectionShellProps {
   id: SectionId;
   index: number;
   command: string;
+  /** Hide outer prompts when the content provides its own terminal prompt. */
+  showCommand?: boolean;
   sectionRef: RefObject<HTMLElement>;
   reducedMotion: boolean;
   children: ReactNode;
@@ -19,6 +21,7 @@ export function SectionShell({
   id,
   index,
   command,
+  showCommand = true,
   sectionRef,
   reducedMotion,
   children,
@@ -83,7 +86,7 @@ export function SectionShell({
                 {String(index).padStart(2, "0")}
               </p>
 
-              <CommandLabel className="mt-2">{command}</CommandLabel>
+              {showCommand && <CommandLabel className="mt-2">{command}</CommandLabel>}
             </div>
           </div>
 
@@ -93,7 +96,7 @@ export function SectionShell({
             className="min-w-0 w-full"
           >
             {/* Mobile command */}
-            <CommandLabel className="mb-5 sm:hidden">{command}</CommandLabel>
+            {showCommand && <CommandLabel className="mb-5 sm:hidden">{command}</CommandLabel>}
 
             {children}
           </div>

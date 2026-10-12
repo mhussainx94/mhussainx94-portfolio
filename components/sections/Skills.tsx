@@ -20,7 +20,7 @@ export function Skills() {
                 <Chip
                   key={skill}
                   size="md"
-                  className="min-w-0 max-w-full break-words bg-panel leading-5 [overflow-wrap:anywhere]"
+                  className="min-w-0 max-w-full break-words bg-transparent leading-5 [overflow-wrap:anywhere]"
                 >
                   {skill}
                 </Chip>

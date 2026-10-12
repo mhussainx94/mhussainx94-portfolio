@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { profile } from "@/data/profile";
 import { useCardPhysics } from "@/hooks/useCardPhysics";
@@ -21,6 +21,7 @@ interface HangingCardProps {
  * only supplies the pointer handlers and the visuals.
  */
 export function HangingCard({ reducedMotion, onActivate, onCardElement }: HangingCardProps) {
+  const [photoFailed, setPhotoFailed] = useState(false);
   const { cardRef, onPointerDown, onPointerMove, onPointerUp, onPointerCancel, onKeyDown } =
     useCardPhysics({ reducedMotion, onActivate });
 
@@ -35,7 +36,7 @@ export function HangingCard({ reducedMotion, onActivate, onCardElement }: Hangin
     <button
       ref={cardRef}
       type="button"
-      aria-label={`${profile.name} — ${profile.title}. Drag to move, or press Enter to continue.`}
+      aria-label="Hi, I’m Muhammad Hussain. Welcome to my portfolio. Drag to move, or press Enter to continue."
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
@@ -49,31 +50,32 @@ export function HangingCard({ reducedMotion, onActivate, onCardElement }: Hangin
         <span className="min-w-0 break-words font-mono text-xs leading-relaxed text-ink-muted [overflow-wrap:anywhere]">root@{profile.handle}</span>
       </div>
 
-      {/* The photo is the card's main visual content now — see
-          PROJECT_GUIDE.md > "Adding your profile image". Falls back to
-          a monogram + instructions until /public/avatar.jpg exists. */}
-      <div
-        className="relative aspect-[4/5] w-full overflow-hidden rounded-md border border-line-strong bg-raised"
-      >
-        {profile.photoUrl ? (
+      <div className="relative ml-auto h-24 w-24 overflow-hidden rounded-lg border border-line bg-raised">
+        {profile.photoUrl && !photoFailed ? (
           <Image
             src={profile.photoUrl}
-            alt={profile.name}
+            alt="Muhammad Hussain"
             fill
-            sizes="(min-width: 640px) 200px, 184px"
-            className="object-cover"
+            sizes="96px"
+            className="object-cover object-top"
+            onError={() => setPhotoFailed(true)}
             priority
           />
         ) : (
-          <div className="flex h-full w-full flex-col items-center justify-center gap-3 p-4 text-center">
-            <span className="flex h-16 w-16 items-center justify-center rounded-full border border-line-strong font-mono text-2xl text-cyan">
-              {profile.name.charAt(0)}
-            </span>
-            <span className="font-mono text-2xs leading-snug text-ink-faint">
-              add /public/avatar.jpg
-            </span>
-          </div>
+          <span className="flex h-full w-full items-center justify-center font-mono text-2xl text-cyan" aria-hidden="true">
+            MH
+          </span>
         )}
+      </div>
+
+      <div className="mt-5 min-w-0 font-mono">
+        <span className="block text-sm leading-6 text-ink-muted">Hi, I’m</span>
+        <span className="mt-1 block break-words text-2xl font-medium leading-8 text-ink">
+          Muhammad Hussain
+        </span>
+        <span className="mt-4 block border-t border-line pt-3 text-xs leading-5 text-ink-muted">
+          Welcome to my portfolio
+        </span>
       </div>
     </button>
   );

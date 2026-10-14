@@ -73,8 +73,11 @@ export function HangingCard({ reducedMotion, onActivate, onCardElement }: Hangin
         <span className="mt-1 block whitespace-nowrap text-xl font-medium leading-8 tracking-tight text-ink sm:text-[1.375rem]">
           Muhammad Hussain
         </span>
-        <span className="mt-4 block border-t border-line pt-3 text-xs leading-5 text-ink-muted">
+        <span className="mt-1 block text-xs leading-5 text-cyan">
           Cybersecurity Professional
+        </span>
+        <span className="mt-4 block border-t border-line pt-3 text-xs leading-5 text-ink-muted">
+          Welcome to my portfolio
         </span>
       </div>
     </button>

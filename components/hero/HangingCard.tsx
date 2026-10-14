@@ -42,7 +42,7 @@ export function HangingCard({ reducedMotion, onActivate, onCardElement }: Hangin
       onPointerUp={onPointerUp}
       onPointerCancel={onPointerCancel}
       onKeyDown={onKeyDown}
-      className="hanging-card w-56 touch-none select-none max-w-full rounded-xl border border-line bg-panel p-5 text-left sm:w-60"
+      className="hanging-card w-64 touch-none select-none max-w-full rounded-xl border border-line bg-panel p-5 text-left sm:w-72"
       style={{ willChange: "transform" }}
     >
       <div className="-mx-5 -mt-5 mb-4 flex items-center gap-2 rounded-t-xl border-b border-line bg-raised px-5 py-3">
@@ -70,11 +70,11 @@ export function HangingCard({ reducedMotion, onActivate, onCardElement }: Hangin
 
       <div className="mt-5 min-w-0 font-mono">
         <span className="block text-sm leading-6 text-ink-muted">Hi, I’m</span>
-        <span className="mt-1 block break-words text-2xl font-medium leading-8 text-ink">
+        <span className="mt-1 block whitespace-nowrap text-xl font-medium leading-8 tracking-tight text-ink sm:text-[1.375rem]">
           Muhammad Hussain
         </span>
         <span className="mt-4 block border-t border-line pt-3 text-xs leading-5 text-ink-muted">
-          Welcome to my portfolio
+          Cybersecurity Professional
         </span>
       </div>
     </button>
